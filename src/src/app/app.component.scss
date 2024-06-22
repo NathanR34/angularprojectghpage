@@ -1,0 +1,18 @@
+.background {
+    background: 
+    linear-gradient(170deg, #3232322a 0%, #7c7c7c6f 28%, #98afc465 37%, #48a0f8cd 40%, #1446916f 47%, #f0fbffd7 55%, #6f88c1c9 60%, #99a6b4b8 62%, #8e97ab9f 67%, #1b2732c9 75%, #6993db5e),
+    radial-gradient(circle at 28% 32%, #3a72cb, #1c77cd 8%, #0763b3 16%, #0e5b9d 18%, #2574b8 19%, #a6c8e4 20%, #3d4952 24%, #2d3038 32%, #0f1a3f);
+}
+.layout {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.top-bar {
+    flex: 0 0 auto;
+}
+.content {
+    flex: 1 1 auto;
+    position: relative;
+    overflow: hidden;
+}

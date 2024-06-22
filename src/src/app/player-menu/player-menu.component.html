@@ -1,0 +1,11 @@
+<mat-card class="page backdrop-blur">
+    <mat-card-header class="align"><h1>Player Menu</h1></mat-card-header>
+    @for(player of this.playerService.players; track player){
+        <app-player [player]="player"/>
+    }
+    <mat-card-actions class="align">
+        @if(this.playerService.players.length < this.playerService.maxPlayers){
+            <button mat-flat-button color="primary" (click)="this.playerService.add()">Add Player</button>
+        }
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,21 @@
+@if(stats.player && game && game.stats){
+    <mat-card [appTheme]="theme">
+        <mat-card-header class="title">
+            <h2>{{stats.player.name}}</h2>
+            <mat-divider></mat-divider>
+        </mat-card-header>
+        <mat-card-content class="stats">
+            <div class="total info">
+                {{stats.answered}} / {{game.playerSize}} Answered
+            </div>
+            <div class="part">
+                <div class="correct info">
+                    Correct: {{stats.correct.points}}
+                </div>
+                <div class="incorrect info">
+                    Incorrect: {{stats.incorrect.points}}
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+}

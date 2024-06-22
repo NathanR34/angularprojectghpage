@@ -1,0 +1,13 @@
+<mat-card color="primary" class="align player" [appTheme]="player.theme">
+    <mat-card-header class="align">
+        <h2 class="player-name">{{this.player.name}}</h2>
+    </mat-card-header>
+    <mat-card-content>
+        Points {{player.stats.points}}
+    </mat-card-content>
+    <mat-card-actions class="align actions">
+        <button mat-flat-button color="warn" (click)="this.leave()">Leave</button>
+        <button mat-flat-button color="primary" (click)="this.openSettings()">Settings</button>
+        <button mat-flat-button color="accent" (click)="this.openStats()">Stats</button>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,9 @@
+<div 
+class="tile prevent-select backdrop-blur" 
+[class.selected]="(this.selector !== undefined) && (this.selection === this.selector)" 
+[class.answered]="(this.state !== '')" 
+[class.correct]="(this.state === 'correct')" 
+[class.incorrect]="(this.state === 'incorrect')"
+(click)="this.select.emit(this.selector)">
+    <ng-content/>
+</div>

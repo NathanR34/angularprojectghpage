@@ -1,0 +1,14 @@
+<mat-card class="layout panel scroll" [appTheme]="data.theme">
+    <mat-card-header class="align">
+        <h2 class="align">
+            Stats
+        </h2>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="content align stack">
+        <app-game-stats [game]="data.game"></app-game-stats>
+    </mat-card-content>
+    <mat-card-actions class="stack actions">
+        <button mat-flat-button (click)="close()" color="primary">Close</button>
+    </mat-card-actions>
+</mat-card>

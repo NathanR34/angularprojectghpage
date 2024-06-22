@@ -1,0 +1,56 @@
+<mat-card class="page backdrop-blur">
+    <mat-card-header class="align"><h1>Game Menu</h1></mat-card-header>
+    <mat-card-content class="content">
+        <mat-card class="clear-background backdrop-blur">
+            <mat-card-header class="align"><h3>Amount of questions</h3></mat-card-header>
+            <mat-slider
+                max="50"
+                [min]="this.playerService.players.length || 1"
+                [step]="this.playerService.players.length || 1"
+                discrete>
+            <input [value]="this.api.amount" (valueChange)="this.setAmount($event)" matSliderThumb>
+            </mat-slider>
+        </mat-card>
+        <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select [value]="(this.api.category)" (valueChange)="this.api.setCategory($event||undefined)" class="backdrop-blur">
+                <mat-option value="">Any</mat-option>
+                @for (key of this.api.iterateCategoryKeys(); track key) {
+                    <mat-option [value]="key">{{this.api.getCategoryName(key)}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Question type</mat-label>
+            <mat-select [value]="(this.api.type || '')" (valueChange)="this.api.setType($event||undefined)" class="backdrop-blur clear-background">
+            <mat-option value="">Any</mat-option>
+            <mat-option value="multiple">Multiple</mat-option>
+            <mat-option value="boolean">Boolean</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Difficulty</mat-label>
+            <mat-select [value]="(this.api.difficulty || '')" (valueChange)="this.api.setDifficulty($event||undefined)" class="backdrop-blur clear-background">
+                <mat-option value="">Any</mat-option>
+                <mat-option value="easy">Easy</mat-option>
+                <mat-option value="medium">Medium</mat-option>
+                <mat-option value="hard">Hard</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-card class="stack pad backdrop-blur clear-background">
+            <mat-card-header><h3>Session</h3></mat-card-header>
+            <mat-slide-toggle (change)="this.api.useSession($event.checked)" [checked]="this.api.session !== undefined" class="backdrop-blur clear-background">
+                Use Session
+            </mat-slide-toggle>
+            @if(this.api.session !== undefined){
+                <div class="spread">
+                    <button mat-flat-button color="primary" (click)="this.api.resetSession()">Reset</button>
+                    <button mat-flat-button color="warn" (click)="this.api.dropSession()">Drop</button>
+                </div>
+            }
+        </mat-card>
+    </mat-card-content>
+    <mat-card-actions class="actions">
+        <button mat-flat-button color="warn" (click)="this.endGame()">End Game</button>
+    </mat-card-actions>
+</mat-card>

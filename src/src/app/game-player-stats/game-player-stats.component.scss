@@ -1,0 +1,13 @@
+.stats {
+    & > .part {
+        display: flex;
+        justify-content: space-evenly;
+        gap: 8px;
+    }
+}
+.title, .info {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

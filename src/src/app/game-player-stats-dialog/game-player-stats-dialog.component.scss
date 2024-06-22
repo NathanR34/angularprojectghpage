@@ -1,0 +1,42 @@
+.layout {
+    gap: 10px;
+}
+.align {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    align-items: stretch;
+    & > * {
+        flex: 1 1 auto;
+    }
+}
+.group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.panel {
+    border-radius: 8px;
+}
+.theme {
+    background-color: rgba(255,255,255,0);
+}
+.header {
+    margin-left: 40px;
+}
+.scroll {
+    overflow: scroll;
+    height: 60vh;
+}

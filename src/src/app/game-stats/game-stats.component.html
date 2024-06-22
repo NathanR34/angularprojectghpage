@@ -1,0 +1,5 @@
+@if(game && game.stats){
+    @for(stats of getPlayerStats(); track stats){
+        <app-game-player-stats [game]="game" [stats]="stats" [theme]="stats.player?.theme"/>
+    }
+}

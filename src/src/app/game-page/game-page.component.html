@@ -1,0 +1,31 @@
+
+<mat-tab-group headerPosition="below" [selectedIndex]="1" class="contain">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon svgIcon="game-menu" aria-hidden="false" aria-label="game menu"/>
+        </ng-template>
+        <div class="full-size"></div>
+        <div class="align-overlay">
+            <app-game-menu class="align-overlay"></app-game-menu>
+        </div>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon svgIcon="game" aria-hidden="false" aria-label="game"/>
+        </ng-template>
+        <div class="full-size"></div>
+        <div class="align-overlay">
+            <app-game></app-game>
+        </div>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon svgIcon="player-menu" aria-hidden="false" aria-label="player menu"/>
+        </ng-template>
+        <div class="full-size"></div>
+        <div class="align-overlay">
+            <app-player-menu></app-player-menu>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+

@@ -1,0 +1,24 @@
+.align {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 12px;
+}
+.background {
+    background-color: #ffffff60;
+}
+.design {
+    background-color: #ffffff60;
+    border-radius: 8px solid;
+}

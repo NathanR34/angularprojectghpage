@@ -1,0 +1,47 @@
+.stack {
+    flex-direction: column;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+    gap: 16px;
+}
+.pad {
+    padding-bottom: 16px;
+}
+.spread {
+    gap: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.align {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.page {
+    min-height: 100%;
+    background-color: #f7f7f72f;
+    padding: 0 24px;
+}
+.clear-background {
+    background-color: #d2d2d200;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-content: center;
+    padding: 4px 16px;
+}
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-content: center;
+    align-items: stretch;
+    padding: 4px 16px;
+}

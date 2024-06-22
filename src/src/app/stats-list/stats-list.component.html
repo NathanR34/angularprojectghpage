@@ -1,0 +1,7 @@
+<div class="content align stack">
+    @if(stats){
+        @for (category of stats.categoryList(); track category){
+            <app-stats [stats]="stats.get(category)" [category]="category"/>
+        }
+    }
+</div>

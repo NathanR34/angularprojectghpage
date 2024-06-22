@@ -1,0 +1,78 @@
+<mat-card class="layout background">
+    @if(this.game){
+        @if(this.finished){
+            <mat-card class="info align" [appTheme]="defaultTheme">
+                <h2>Correct: {{this.game.stats.correct}}</h2>
+                <h2>Incorrect: {{this.game.stats.incorrect}}</h2>
+            </mat-card>
+            @if(game.players.length > 0){
+                <div class="player">
+                    <app-game-stats [game]="game"/>
+                </div>
+            }
+            <mat-card-actions class="actions">
+                <button mat-flat-button color="primary" (click)="endGame()">End Game</button>
+            </mat-card-actions>
+        } @else {
+            @if(this.question){
+                <mat-card class="info align" [appTheme]="defaultTheme">
+                    <h2>
+                        {{this.game.currentTrivia}} / {{this.game.size}}
+                    </h2>
+                    <mat-divider></mat-divider>
+                    <div class="spread">
+                        <div class="align">
+                            {{this.parse(this.question.data.category)}}
+                        </div>
+                        <div class="align">
+                            {{this.question.data.difficulty}}
+                        </div>
+                        <div class="align">
+                            {{this.question.data.type}}
+                        </div>
+                    </div>
+                </mat-card>
+                @if(this.question.player && this.question.stats){
+                    <div class="player">
+                        <app-game-player-stats [stats]="this.question.stats" [theme]="questionTheme" [game]="game"/>
+                        <div class="stretch space theme" [appTheme]="questionTheme">
+                            <button mat-stroked-button (click)="gameService.openPlayerDataDialog(game, question.stats, defaultTheme)">...</button>
+                        </div>
+                    </div>
+                }
+            }
+            <mat-card class="content" [appTheme]="questionTheme">
+                @if(this.question){
+                    <mat-card-header class="header"><h2 class="align">{{this.parse(this.question.data.question)}}</h2></mat-card-header>
+                    <mat-grid-list class="questions" cols="2" rowHeight="5:3" gutterSize="12px">
+                        @for (answer of this.question.answers; track answer) {
+                            <mat-grid-tile class="tile">
+                                <app-answer-tile 
+                                [selector]="answer" 
+                                [selection]="this.selection" 
+                                (select)="this.select($event)" 
+                                [state]="this.getTileState(answer)">
+                                    {{this.parse(answer.answer)}}
+                                </app-answer-tile>
+                            </mat-grid-tile>
+                        }
+                    </mat-grid-list>
+                }
+            </mat-card>
+            <mat-card-actions class="actions">
+                <button mat-flat-button color="primary" (click)="submit()">{{answered?"Next":selection?"Submit":"Skip"}}</button>
+            </mat-card-actions>
+        }
+    } @else {
+        @if(creatingGame){
+            <mat-card-content class="loading">
+                <div>{{triviaApi.apiStatus}}</div>
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </mat-card-content>
+        } @else {
+            <mat-card-actions class="actions">
+                <button mat-flat-button color="accent" (click)="this.startGame()">Start Game</button>
+            </mat-card-actions>
+        }
+    }
+</mat-card>

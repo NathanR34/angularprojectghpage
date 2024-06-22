@@ -1,0 +1,18 @@
+:host {
+    margin: 24px;
+    border-radius: 24px;
+}
+.align {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.player {
+    border-radius: 8px;
+}
+.actions {
+    gap: 16px;
+}
+.player-name {
+    min-width: 24ch;
+}

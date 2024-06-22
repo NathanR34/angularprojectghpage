@@ -1,0 +1,13 @@
+<mat-card class="backdrop-blur background">
+    <mat-card-header class="align"><h1>Login</h1></mat-card-header>
+    <mat-card-content>
+        
+    </mat-card-content>
+    <mat-card-actions class="actions">
+        <button mat-flat-button (click)="toLogin()" color="primary">Login</button>
+        <button mat-flat-button (click)="toSignup()" color="accent">Sign Up</button>
+        @if(playerService.players.length){
+            <button mat-stroked-button (click)="toGame()" color="primary">Play Trivia</button>
+        }
+    </mat-card-actions>
+</mat-card>

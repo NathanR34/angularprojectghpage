@@ -1,0 +1,36 @@
+<mat-card class="layout panel" [appTheme]="player.theme">
+    <mat-card-header class="align">
+        <h2 class="editable align header" 
+        #namefield
+        [class.editing]="this.editNameMode"
+        [contentEditable]="this.editNameMode" 
+        (input)="this.playerService.editPlayerName(this.player, $event, this.nameEdit)" 
+        (keydown)="nameEditKeyboardEvent($event)"
+        (blur)="endNameEdit($event)">
+            {{this.player.name}}
+        </h2>
+        <button mat-icon-button (click)="startNameEdit()"><mat-icon>edit</mat-icon></button>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="content align stack">
+        <h3>Colors</h3>
+        <div class="group">
+            <input matInput type="color"
+                (input)="applyColor1($event)"
+                [value]="player.theme.color1"
+            />
+            <input matInput type="color"
+                (input)="applyColor2($event)"
+                [value]="player.theme.color2"
+            />
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="actions">
+        @if(!player.account){
+            <button mat-flat-button (click)="login()" color="primary">Login</button>
+        } @else {
+            <button mat-flat-button (click)="logout()" color="warn">Logout</button>
+        }
+        <button mat-flat-button (click)="close()">Close</button>
+    </mat-card-actions>
+</mat-card>

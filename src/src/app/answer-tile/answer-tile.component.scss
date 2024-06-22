@@ -1,0 +1,34 @@
+:host {
+    width: 100%;
+    height: 100%;
+}
+
+.tile {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 16px;
+    &.answered {
+        &.correct {
+            background-color: #8cff00aa;
+        }
+        &.incorrect {
+            background-color: #cccccc88;
+        }
+    }
+    &.selected {
+        background-color: #0055ffaa;
+        &.answered {
+            &.correct {
+                background-color: #00aa00aa;
+            }
+            &.incorrect {
+                background-color: #ff0000aa;
+            }
+        }
+    }
+    
+}
