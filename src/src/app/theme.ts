@@ -130,7 +130,7 @@ export class Theme implements ThemeI {
     color2: string = "#000000";
     blur: string = "5px";
     get backgroundImage(){
-        return `linear-gradient(130deg, ${this.color1}55, ${this.color2}55)`;
+        return `linear-gradient(130deg, ${this.color1}88, ${this.color2}88)`;
     }
 
     constructor(from?:ThemeI){

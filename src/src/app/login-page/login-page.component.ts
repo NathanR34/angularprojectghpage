@@ -18,7 +18,7 @@ export class LoginPageComponent {
     this.playerService.openLoginDialog(null, {signUp: false, redirect:true, offerSettings: true});
   }
   toSignup(){
-    this.playerService.openLoginDialog(null, {signUp: false, redirect:true, offerSettings: true});
+    this.playerService.openLoginDialog(null, {signUp: true, redirect:true, offerSettings: true});
   }
   toGame(){
     this.router.navigate(['game']);

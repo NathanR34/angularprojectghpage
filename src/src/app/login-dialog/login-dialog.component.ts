@@ -91,28 +91,35 @@ export class LoginDialogComponent {
   toSignUp(){
     this.inSignUp = true;
   }
+  toMessage(message:string, fail:boolean){
+    this.message = message;
+    this.failed = fail;
+  }
   async login(){
     let form = getValues(this.loginForm, {email: true, password: true});
-    let player = this.player;
     if(form){
       let existing = this.playerService.getPlayerByAccount({email: form['email']})
       if(existing){
-        this.message = "Already signed in";
-        this.failed = false;
+        this.player = existing;
+        this.toMessage("Already signed in", false);
         return;
       }
       try {
+
         this.loadMessage = "Logging in";
-        let status = await this.playerService.signIn(player, {email: form['email'], password: form['password']});
+        let status = await this.playerService.signIn(this.player, {email: form['email'], password: form['password']});
+
         if(status.success){
+
           this.loadMessage = "Loading data";
-          await this.playerService.loadUserData(player);
-          this.player = this.playerService.add(player) || this.player;
-          this.message = "Welcome back";
-          this.failed = false;
+          await this.playerService.loadUserData(this.player);
+
+          this.playerService.add(this.player);
+          
+          this.toMessage("Welcome back", false);
+
         } else {
-          this.message = `${status.code} ${status.message}`;
-          this.failed = true;
+          this.toMessage(`${status.code} ${status.message}`, true);
         }
       } finally {
         this.loadMessage = undefined;
@@ -121,29 +128,59 @@ export class LoginDialogComponent {
   }
   async register(){
     let form = getValues(this.signUpForm, {email: true, password: true});
-    let player = this.player;
     if(form){
       let existing = this.playerService.getPlayerByAccount({email: form['email']})
       if(existing){
-        this.message = "Already signed in";
-        this.failed = false;
+        this.player = existing;
+        this.toMessage("Already signed in", false);
         return;
       }
       try {
+
         this.loadMessage = "Signing up";
-        let status = await this.playerService.signUp(player, {email: form['email'], password: form['password']});
+        let status = await this.playerService.signUp(this.player, {email: form['email'], password: form['password']});
+        
         if(status.success){
-          this.player = this.playerService.add(player) || this.player;
-          this.message = "Welcome";
-          this.failed = false;
+
+          this.playerService.add(this.player);
+
+          this.toMessage("Welcome", false);
+
         } else {
-          this.message = `${status.code} ${status.message}`;
-          this.failed = true;
+          this.toMessage(`${status.code} ${status.message}`, true);
         }
       } finally {
         this.loadMessage = undefined;
       }
     }
+  }
+  async signInWithGoogle(){
+    try {
+      this.loadMessage = "Signing in";
+      let result = await this.playerService.signInWithGoogle(this.player);
+      if(result.success){
+        if(result.duplicate){
+
+          this.player = result.duplicate;
+          this.toMessage("Already signed in", false);
+
+        } else {
+
+          this.loadMessage = "Loading data";
+          await this.playerService.loadUserData(this.player);
+
+          this.playerService.add(this.player);
+
+          this.toMessage("Welcome", false);
+
+        }
+      } else {
+        this.toMessage(`${result.code} ${result.message}`, true);
+      }
+    } finally {
+      this.loadMessage = undefined;
+    }
+
   }
   clearMessage(){
     this.message = undefined;
