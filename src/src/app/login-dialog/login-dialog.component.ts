@@ -182,6 +182,24 @@ export class LoginDialogComponent {
     }
 
   }
+  async signInAnonymous(){
+    try {
+      this.message = "Signing in"
+      let result = await this.playerService.signInAnonymous(this.player);
+      if(result.success){
+        this.loadMessage = "Loading data";
+          await this.playerService.loadUserData(this.player);
+
+          this.playerService.add(this.player);
+
+          this.toMessage("Welcome", false);
+      } else {
+        this.toMessage(`${result.code} ${result.message}`, true);
+      }
+    } finally {
+      this.loadMessage = undefined;
+    }
+  }
   clearMessage(){
     this.message = undefined;
     this.failed = undefined;

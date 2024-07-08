@@ -7,7 +7,7 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { PlayerSettingsDialogComponent } from './player-settings-dialog/player-settings-dialog.component';
 import { Theme } from './theme';
 import { PlayerStatsDialogComponent } from './player-stats-dialog/player-stats-dialog.component';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, User, GoogleAuthProvider, signInWithPopup, setPersistence } from '@angular/fire/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, User, GoogleAuthProvider, signInWithPopup, setPersistence, signInAnonymously } from '@angular/fire/auth';
 import { Firestore, collection, doc, getDoc, getFirestore, setDoc } from '@angular/fire/firestore';
 
 const googleAuthProvider = new GoogleAuthProvider();
@@ -159,8 +159,7 @@ export class PlayerService {
       return {success: true};
 
     } catch(error: any){
-      let errorCode = error.code;
-      if(!errorCode && String(errorCode) !== "0"){errorCode = ""}
+      let errorCode = (!error.code && error.code !== 0)?"":String(error.code);
       let errorMessage = String(error.message || "");
       return {success: false, message: errorMessage, code: errorCode};
     }
@@ -175,8 +174,7 @@ export class PlayerService {
       return {success: true};
 
     } catch(error: any){
-      let errorCode = error.code;
-      if(!errorCode && errorCode !== 0){errorCode = ""}
+      let errorCode = (!error.code && error.code !== 0)?"":String(error.code);
       let errorMessage = String(error.message || "");
       return {success: false, message: errorMessage, code: errorCode};
     }
@@ -200,12 +198,23 @@ export class PlayerService {
         return {success: true}
       }
     } catch(error: any){
-      let errorCode = error.code;
-      if(!errorCode && errorCode !== 0){errorCode = ""}
+      let errorCode = (!error.code && error.code !== 0)?"":String(error.code);
       let errorMessage = String(error.message || "");
 
       //let email = error.customData.email;
       //let cred = GoogleAuthProvider.credentialFromError(error);
+
+      return {success: false, message: errorMessage, code: errorCode};
+    }
+  }
+  async signInAnonymous(player:Player): Promise<{success: boolean, message?:string, code?:string}>{
+    try {
+      let result = await signInAnonymously(this.auth);
+      player.account = <PlayerAccount>{user: result.user};
+      return {success: true}
+    } catch(error: any){
+      let errorCode = (!error.code && error.code !== 0)?"":String(error.code);
+      let errorMessage = String(error.message || "");
 
       return {success: false, message: errorMessage, code: errorCode};
     }
